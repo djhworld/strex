@@ -12,6 +12,13 @@ func FailWithLog(t *testing.T, log string) {
 }
 
 // --------------------- HEAD ------------------------
+func BenchmarkHead(b *testing.B) {
+	var str string = "hello"
+	for i := 0; i < b.N; i++ {
+		Head(str)
+	}
+}
+
 func TestHead(t *testing.T) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -74,6 +81,13 @@ func TestTailWithEmpty(t *testing.T) {
 }
 
 // --------------------- TAKE ------------------------
+func BenchmarkTake(b *testing.B) {
+	var str string = "hello this is a benchmarking test to see if this works"
+	for i := 0; i < b.N; i++ {
+		Take(12,str)
+	}
+}
+
 func TestTake(t *testing.T) {
 	var input string = "testing"
 	var expected string = "test"
