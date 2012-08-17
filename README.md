@@ -21,15 +21,6 @@ As soon as the Go team implement generics/parametric polymorphism into the langu
 See [strings.Map](http://golang.org/pkg/strings/#Map) for the default implementation, although this version is NOT like Haskell's ```map``` in the sense that you can only input and output a string, no other type.
 
 
-##Examples
-	Head("hello") // returns 'h'
-	Tail("hello") // returns "ello"
-	Take(2, "golang") // returns "go"
-	Drop(2, "golang") // returns "lang"
-	TakeWhile(func(a rune) bool { return a == 'a' }, "aaaaAbbbbbccccc") // returns "aaaa"
-	DropWhile(func(a rune) bool { return a == ' ' }, "        Hello World") // returns "Hello World"
-	Reverse("golang") // returns "gnalog"
-	Filter(func(a rune) bool { return !strings.ContainsRune("!.,?:;-'\"", a) }, "hello!?") // returns "hello"
-	Span(func(a rune) bool { return a != ' ' }, "hello world") // returns ("hello"," world")
-	Group("aaabbbccd") // returns []string{ "aaa", "bbb", "cc", "d" }
-	Distinct("google") // returns "gole"
+##Documentation
+$ godoc -http=:8080 
+[Open docs](http://localhost:8080/pkd/github.com/djhworld/strings_ext)
