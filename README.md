@@ -4,11 +4,11 @@ This is a small library that implements some of the functions from the ```Data.L
 
 ## Install
 
-$ go get github.com/djhworld/strings_ext
+	$ go get github.com/djhworld/strings_ext
 
 ## Rationale 
 
-Because I enjoy programming in Haskell and want some of the standard library features found Data.List to useful in Go. 
+Because I enjoy programming in Haskell and want some of the standard library features found ```Data.List``` to be in Go
 
 ## But why only for strings? Why not use empty interfaces and make your code "generic" so it works with any datatype?
 
