@@ -1,12 +1,12 @@
-# strings_ext
+#strings_ext
 
 This is a small library that implements some of the functions from the ```Data.List``` package in Haskell that are only applicable to strings. The code is *probably* **very inefficient**, but I found it enjoyable as an intellectual excercise to port these useful functions over to Go.
 
-## Install
+##Install
 
 	$ go get github.com/djhworld/strings_ext
 
-## Rationale 
+##Rationale 
 
 Because I enjoy programming in Haskell and want some of the standard library features found ```Data.List``` to be in Go
 
@@ -16,12 +16,12 @@ Personally, I don't see the use of the empty interface to be best practise when 
 
 As soon as the Go team implement generics/parametric polymorphism into the language I'll almost certainly drop this library and create a more "generic" solution akin to ```Data.List```. For those looking to go down the ```interface{}``` route now, please see the [Seq](https://github.com/zot/seq/blob/release/seq.go) library by Bill Burdick
 
-## Why no Map?
+##Why no Map?
 
 See [strings.Map](http://golang.org/pkg/strings/#Map) for the default implementation, although this version is NOT like Haskell's ```map``` in the sense that you can only input and output a string, no other type.
 
 
-## Examples
+##Examples
 	Head("hello") // returns 'h'
 	Tail("hello") // returns "ello"
 	Take(2, "golang") // returns "go"
