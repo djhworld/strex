@@ -23,4 +23,4 @@ See [strings.Map](http://golang.org/pkg/strings/#Map) for the default implementa
 
 ##Documentation
 	$ godoc -http=:8080 
-[Open documentation](http://localhost:8080/pkg/github.com/djhworld/strings_ext)
+then [Open documentation](http://localhost:8080/pkg/github.com/djhworld/strings_ext)
