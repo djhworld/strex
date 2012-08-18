@@ -66,6 +66,22 @@ func TestTail(t *testing.T) {
 	assert.Equal(t, actual, expected)
 }
 
+func TestTailWithOneChar(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			FailWithLog(t, "Exception should NOT have been thrown!")
+		} else {
+			t.Log("No exception caught, we're OK!\n")
+		}
+	}()
+
+	var input string = "h"
+	var expected string = ""
+	var actual string = Tail(input)
+
+	assert.Equal(t, actual, expected)
+}
+
 func TestTailWithEmpty(t *testing.T) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -84,7 +100,7 @@ func TestTailWithEmpty(t *testing.T) {
 func BenchmarkTake(b *testing.B) {
 	var str string = "hello this is a benchmarking test to see if this works"
 	for i := 0; i < b.N; i++ {
-		Take(12,str)
+		Take(12, str)
 	}
 }
 
@@ -410,5 +426,138 @@ func TestDistinctWithAllDistinct(t *testing.T) {
 	var input string = "great"
 	var expected string = "great"
 	var actual string = Distinct(input)
+	assert.Equal(t, actual, expected)
+}
+
+// --------------------- LAST ------------------------
+func TestLast(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			FailWithLog(t, "Exception should NOT have been thrown!")
+		} else {
+			t.Log("No exception caught, we're OK!\n")
+		}
+	}()
+
+	var input string = "hello"
+	var expected rune = 'o'
+	var actual rune = Last(input)
+
+	assert.Equal(t, expected, actual)
+}
+
+func TestLastWithEmpty(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			t.Log("Exception was thrown successfully\n")
+		} else {
+			FailWithLog(t, "No exception was thrown!")
+		}
+	}()
+
+	//should throw panic for empty
+	Last("")
+	t.Fail()
+}
+
+// --------------------- INIT ------------------------
+func TestInit(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			FailWithLog(t, "Exception should NOT have been thrown!")
+		} else {
+			t.Log("No exception caught, we're OK!\n")
+		}
+	}()
+
+	var input string = "hello"
+	var expected string = "hell"
+	var actual string = Init(input)
+
+	assert.Equal(t, actual, expected)
+}
+
+func TestInitWithEmpty(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			t.Log("Exception was thrown successfully\n")
+		} else {
+			FailWithLog(t, "No exception was thrown!")
+		}
+	}()
+
+	//should throw panic for empty
+	Init("")
+	t.Fail()
+}
+
+func TestInitWithOneChar(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			FailWithLog(t, "Exception should NOT have been thrown!")
+		} else {
+			t.Log("No exception caught, we're OK!\n")
+		}
+	}()
+
+	var input string = "h"
+	var expected string = ""
+	var actual string = Init(input)
+
+	assert.Equal(t, actual, expected)
+}
+
+// --------------------- ISEMPTY ------------------------
+func TestIsEmptyTrue(t *testing.T) {
+	var input string = ""
+	var expected bool = true
+	var actual = IsEmpty(input)
+
+	assert.Equal(t, actual, expected)
+}
+
+func TestIsEmptyFalse(t *testing.T) {
+	var input string = "daniel"
+	var expected bool = false
+	var actual = IsEmpty(input)
+
+	assert.Equal(t, actual, expected)
+}
+
+// --------------------- ALL ------------------------
+func TestAll(t *testing.T) {
+	var isLowercase func(rune) bool = func(r rune) bool {
+		return r >= 97 && r <= 122
+	}
+
+	var input string = "aaa"
+	var expected bool = true
+	var actual = All(isLowercase, input)
+
+	assert.Equal(t, actual, expected)
+}
+
+func TestAllWithEmpty(t *testing.T) {
+	var isLowercase func(rune) bool = func(r rune) bool {
+		return r >= 97 && r <= 122
+	}
+
+	var input string = ""
+	var expected bool = true
+	var actual = All(isLowercase, input)
+
+	assert.Equal(t, actual, expected)
+}
+
+
+func TestAllFalse(t *testing.T) {
+	var isLowercase func(rune) bool = func(r rune) bool {
+		return r >= 97 && r <= 122
+	}
+
+	var input string = "aaaA"
+	var expected bool = false
+	var actual = All(isLowercase, input)
+
 	assert.Equal(t, actual, expected)
 }

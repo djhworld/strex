@@ -26,6 +26,26 @@ func ExampleTail() {
 	//Output: olang
 }
 
+func ExampleLast() {
+	//Haskell type signature (polymorphic): -
+	//    last :: [a] -> a
+
+	var str string = "google"
+	fmt.Println(string(Last(str))) //Last returns a rune
+
+	//Output: e
+}
+
+func ExampleInit() {
+	//Haskell type signature (polymorphic): -
+	//    init :: [a] -> [a]
+
+	var str string = "google"
+	fmt.Println(string(Init(str)))
+
+	//Output: googl
+}
+
 func ExampleTake() {
 	//Haskell type signature (polymorphic): -
 	//    take :: Int -> [a] -> [a]
@@ -131,4 +151,25 @@ func ExampleSpan() {
 	fmt.Println(Span(func(a rune) bool { return a != ' ' }, input))
 
 	//Output: hello  world
+}
+
+func ExampleIsEmpty() {
+	//Haskell type signature (polymorphic): -
+	//    null :: [a] -> Bool
+
+	var input string = ""
+	fmt.Println(IsEmpty(input))
+
+	//Output: true
+}
+
+func ExampleAll() {
+	var isLowercase func(rune) bool = func(r rune) bool {
+		return r >= 97 && r <= 122
+	}
+
+	var input string = "Google"
+	fmt.Println(All(isLowercase, input))
+
+	//Output: false
 }
