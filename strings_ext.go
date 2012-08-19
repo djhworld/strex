@@ -7,30 +7,32 @@ language
 */
 package strings_ext
 
+import (
+	"unicode/utf8"
+)
+
 //Head returns the first rune of s which must be non-empty
 func Head(s string) rune {
-	if len(s) == 0 {
+	if s == "" {
 		panic("empty list")
 	}
-
-	runes := []rune(s)
-	return runes[0]
+	r, _ := utf8.DecodeRuneInString(s)
+	return r
 }
 
 //Tail returns the the remainder of s minus the first rune of s, which must be non-empty
 func Tail(s string) string {
-	if len(s) == 0 {
+	if s == "" {
 		panic("empty list")
 	}
 
-	runes := []rune(s)
-	xs := runes[1:]
-	return string(xs)
+	_, sz := utf8.DecodeRuneInString(s)
+	return s[sz:]
 }
 
-//Take returns the n rune prefix of s or s itself if n > len(s)
+//Take returns the n rune prefix of s or s itself if n > len([]rune(s))
 func Take(n int, s string) string {
-	if n <= 0 || len(s) == 0 {
+	if n <= 0 || s == "" {
 		return ""
 	}
 
@@ -39,11 +41,11 @@ func Take(n int, s string) string {
 	return x + Take(n-1, xs)
 }
 
-//Drop returns the suffix of s after the first n runes, or "" if n > len(s)
+//Drop returns the suffix of s after the first n runes, or "" if n > len([]rune(s))
 func Drop(n int, s string) string {
 	if n <= 0 {
 		return s
-	} else if len(s) == 0 {
+	} else if s == "" {
 		return s
 	}
 
@@ -54,7 +56,7 @@ func Drop(n int, s string) string {
 //TakeWhile, applied to a predicate p and a string s, returns the longest 
 // prefix (possibly empty) of s of elements that satisfy p
 func TakeWhile(p func(rune) bool, s string) string {
-	if len(s) == 0 {
+	if s == "" {
 		return ""
 	}
 
@@ -70,7 +72,7 @@ func TakeWhile(p func(rune) bool, s string) string {
 
 //DropWhile returns the suffix remaining after TakeWhile
 func DropWhile(p func(rune) bool, s string) string {
-	if len(s) == 0 {
+	if s == "" {
 		return ""
 	}
 	x := Head(s)
@@ -83,7 +85,7 @@ func DropWhile(p func(rune) bool, s string) string {
 
 //Reverse returns the string s in reverse order
 func Reverse(s string) string {
-	if len(s) == 0 {
+	if s == "" {
 		return ""
 	}
 	x := Head(s)
@@ -94,7 +96,7 @@ func Reverse(s string) string {
 // Filter, applied to a predicate and a string, returns a string of characters 
 // (runes) that satisfy the predicate
 func Filter(p func(rune) bool, s string) string {
-	if len(s) == 0 {
+	if s == "" {
 		return ""
 	}
 
@@ -130,7 +132,7 @@ func GroupBy(p func(rune, rune) bool, s string) []string {
 // Distinct removes duplicate elements from a string. 
 // In particular, it keeps only the first occurrence of each element. 
 func Distinct(s string) string {
-	if len(s) == 0 {
+	if s == "" {
 		return ""
 	}
 
@@ -142,29 +144,29 @@ func Distinct(s string) string {
 
 //Last returns the last rune in a string s, which must be non-empty.
 func Last(s string) rune {
-	if len(s) == 0 {
+	if s == "" {
 		panic("empty list")
 	}
 
-	runes := []rune(s)
-	return runes[len(s)-1]
+	r, _ := utf8.DecodeLastRuneInString(s)
+	return r
 }
 
 //Init returns all the elements of s except the last one. The string must 
 //be non-empty.
 func Init(s string) string {
-	if len(s) == 0 {
+	if s == "" {
 		panic("empty list")
 	}
 
-	runes := []rune(s)
-	init := runes[0 : len(s)-1]
-	return string(init)
+	_, sz := utf8.DecodeRuneInString(s)
+	c := utf8.RuneCountInString(s)
+	return s[0 : (sz*c)-sz]
 }
 
 //IsEmpty tests whether the string s is empty
 func IsEmpty(s string) bool {
-	return len(s) == 0
+	return s == ""
 }
 
 //All applied to a predicate p and a string s, determines if all elements of
@@ -189,7 +191,7 @@ func All(p func(rune) bool, s string) bool {
 
 // Private methods 
 func groupBy_(p func(rune, rune) bool, s string) []string {
-	if len(s) == 0 {
+	if s == "" {
 		return []string{}
 	}
 	x := Head(s)
