@@ -22,4 +22,4 @@ See [strings.Map](http://golang.org/pkg/strings/#Map) for the default implementa
 
 
 ##Documentation
-[http://localhost:8080/pkg/github.com/djhworld/strings_ext](http://localhost:8080/pkg/github.com/djhworld/strings_ext)
+[http://go.pkgdoc.org/github.com/djhworld/strings_ext](http://go.pkgdoc.org/github.com/djhworld/strings_ext)
