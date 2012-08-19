@@ -7,9 +7,7 @@ language
 */
 package strings_ext
 
-const EMPTY_STR string = ""
-
-//Extract the first element of a string, which must be non-empty.
+//Head returns the first rune of s which must be non-empty
 func Head(s string) rune {
 	if len(s) == 0 {
 		panic("empty list")
@@ -19,7 +17,7 @@ func Head(s string) rune {
 	return runes[0]
 }
 
-//Extract the remaining string after the head of a string, which must be non-empty.
+//Tail returns the the remainder of s minus the first rune of s, which must be non-empty
 func Tail(s string) string {
 	if len(s) == 0 {
 		panic("empty list")
@@ -30,50 +28,50 @@ func Tail(s string) string {
 	return string(xs)
 }
 
-//Take N, applied to a string S, returns the prefix of S of length N, or S itself if N > len(S)
-func Take(i int, s string) string {
-	if i <= 0 || len(s) == 0 {
-		return EMPTY_STR
+//Take returns the n rune prefix of s or s itself if n > len(s)
+func Take(n int, s string) string {
+	if n <= 0 || len(s) == 0 {
+		return ""
 	}
 
 	x := string(Head(s))
 	xs := Tail(s)
-	return x + Take(i-1, xs)
+	return x + Take(n-1, xs)
 }
 
-//Drop(N,S) returns the suffix of S after the first N elements, or "" if N > len(S)
-func Drop(i int, s string) string {
-	if i <= 0 {
+//Drop returns the suffix of s after the first n runes, or "" if n > len(s)
+func Drop(n int, s string) string {
+	if n <= 0 {
 		return s
 	} else if len(s) == 0 {
 		return s
 	}
 
 	xs := Tail(s)
-	return Drop(i-1, xs)
+	return Drop(n-1, xs)
 }
 
-//TakeWhile, applied to a predicate P and a string S, returns the longest 
-// prefix (possibly empty) of S of elements that satisfy P
+//TakeWhile, applied to a predicate p and a string s, returns the longest 
+// prefix (possibly empty) of s of elements that satisfy p
 func TakeWhile(p func(rune) bool, s string) string {
 	if len(s) == 0 {
-		return EMPTY_STR
+		return ""
 	}
 
 	x := Head(s)
 	xs := Tail(s)
 
 	if !p(x) {
-		return EMPTY_STR
+		return ""
 	}
 
 	return string(x) + TakeWhile(p, xs)
 }
 
-//DropWhile(P,S) returns the suffix remaining after TakeWhile(P,S)
+//DropWhile returns the suffix remaining after TakeWhile
 func DropWhile(p func(rune) bool, s string) string {
 	if len(s) == 0 {
-		return EMPTY_STR
+		return ""
 	}
 	x := Head(s)
 	xs := Tail(s)
@@ -83,10 +81,10 @@ func DropWhile(p func(rune) bool, s string) string {
 	return DropWhile(p, xs)
 }
 
-//Reverse(S) returns the string S in reverse order
+//Reverse returns the string s in reverse order
 func Reverse(s string) string {
 	if len(s) == 0 {
-		return EMPTY_STR
+		return ""
 	}
 	x := Head(s)
 	xs := Tail(s)
@@ -97,7 +95,7 @@ func Reverse(s string) string {
 // (runes) that satisfy the predicate
 func Filter(p func(rune) bool, s string) string {
 	if len(s) == 0 {
-		return EMPTY_STR
+		return ""
 	}
 
 	x := Head(s)
@@ -110,30 +108,30 @@ func Filter(p func(rune) bool, s string) string {
 	return string(x) + Filter(p, xs)
 }
 
-//Span, applied to a predicate P and a string S, returns two strings where the 
-//first string is longest prefix (possibly empty) of S of characters (runes) that 
-//satisfy P and the second string is the remainder of the string 
+//Span, applied to a predicate p and a string s, returns two strings where the 
+//first string is longest prefix (possibly empty) of s of characters (runes) that 
+//satisfy p and the second string is the remainder of the string 
 func Span(p func(rune) bool, s string) (string, string) {
 	return TakeWhile(p, s), DropWhile(p, s)
 }
 
-//The Group function takes a string and returns a slice of strings such 
+//Group takes a string and returns a slice of strings such 
 //that the concatenation of the result is equal to the argument.
 //Moreover, each sublist in the result contains only equal elements.
 func Group(s string) []string {
 	return GroupBy(func(a, b rune) bool { return a == b }, s)
 }
 
-//The GroupBy function is the non-overloaded version of Group.
+//GroupBy is the non-overloaded version of Group.
 func GroupBy(p func(rune, rune) bool, s string) []string {
 	return reverseStringSlice(groupBy_(p, s))
 }
 
-// The Distinct function removes duplicate elements from a string. 
+// Distinct removes duplicate elements from a string. 
 // In particular, it keeps only the first occurrence of each element. 
 func Distinct(s string) string {
 	if len(s) == 0 {
-		return EMPTY_STR
+		return ""
 	}
 
 	x := Head(s)
@@ -142,7 +140,7 @@ func Distinct(s string) string {
 	return string(x) + Distinct(Filter(func(y rune) bool { return x != y }, xs))
 }
 
-//Extract the last element of a string, which must be non-empty.
+//Last returns the last rune in a string s, which must be non-empty.
 func Last(s string) rune {
 	if len(s) == 0 {
 		panic("empty list")
@@ -152,7 +150,7 @@ func Last(s string) rune {
 	return runes[len(s)-1]
 }
 
-//Return all the elements of a string except the last one. The string must 
+//Init returns all the elements of s except the last one. The string must 
 //be non-empty.
 func Init(s string) string {
 	if len(s) == 0 {
@@ -164,13 +162,13 @@ func Init(s string) string {
 	return string(init)
 }
 
-//Tests whether a string is empty
+//IsEmpty tests whether the string s is empty
 func IsEmpty(s string) bool {
 	return len(s) == 0
 }
 
-//Applied to a predicate P and a string S, All determines if all elements of
-//S satisfy P
+//All applied to a predicate p and a string s, determines if all elements of
+//s satisfy p
 func All(p func(rune) bool, s string) bool {
 	if IsEmpty(s) {
 		return true
