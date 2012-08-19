@@ -43,9 +43,7 @@ func Take(n int, s string) string {
 
 //Drop returns the suffix of s after the first n runes, or "" if n > len([]rune(s))
 func Drop(n int, s string) string {
-	if n <= 0 {
-		return s
-	} else if s == "" {
+	if n <= 0 || s == "" {
 		return s
 	}
 
