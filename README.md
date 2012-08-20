@@ -23,3 +23,4 @@ See [strings.Map](http://golang.org/pkg/strings/#Map) for the default implementa
 
 ##Documentation
 [http://go.pkgdoc.org/github.com/djhworld/strings_ext](http://go.pkgdoc.org/github.com/djhworld/strings_ext)
+
