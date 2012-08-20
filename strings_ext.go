@@ -228,6 +228,18 @@ func GroupBy(p func(rune, rune) bool, s string) []string {
 	return reverseStringSlice(groupBy_(p, s))
 }
 
+//Replacing due to terrible performance issues
+//func Distinct(s string) string {
+//	if s == "" {
+//		return ""
+//	}
+//
+//	x := Head(s)
+//	xs := Tail(s)
+//
+//	return string(x) + Distinct(Filter(func(y rune) bool { return x != y }, xs))
+//}
+
 // Distinct removes duplicate elements from a string. 
 // In particular, it keeps only the first occurrence of each element. 
 func Distinct(s string) string {
@@ -235,10 +247,15 @@ func Distinct(s string) string {
 		return ""
 	}
 
-	x := Head(s)
-	xs := Tail(s)
+	var result []rune
 
-	return string(x) + Distinct(Filter(func(y rune) bool { return x != y }, xs))
+	for _, r := range []rune(s) {
+		if containsRune(result, r) == false {
+			result = append(result, r)
+		}
+	}
+
+	return string(result)
 }
 
 //Last returns the last rune in a string s, which must be non-empty.
@@ -307,4 +324,13 @@ func reverseStringSlice(s []string) []string {
 	x := s[0]
 	xs := s[1:]
 	return append(reverseStringSlice(xs), x)
+}
+
+func containsRune(rs []rune, r rune) bool {
+       for _, rv := range rs {
+               if rv == r {
+                       return true
+               }
+       }
+       return false
 }
