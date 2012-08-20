@@ -85,6 +85,24 @@ func Drop(n int, s string) string {
 	return s[byteLen:]
 }
 
+// recursive solution is not very performant
+// BenchmarkTakeWhile	  100000	     13097 ns/op
+// BenchmarkTakeWhile	 1000000	      1839 ns/op
+//func TakeWhile(p func(rune) bool, s string) string {
+//	if s == "" {
+//		return ""
+//	}
+//
+//	x := Head(s)
+//	xs := Tail(s)
+//
+//	if !p(x) {
+//		return ""
+//	}
+//
+//	return string(x) + TakeWhile(p, xs)
+//}
+
 //TakeWhile, applied to a predicate p and a string s, returns the longest 
 // prefix (possibly empty) of s of elements that satisfy p
 func TakeWhile(p func(rune) bool, s string) string {
@@ -92,14 +110,19 @@ func TakeWhile(p func(rune) bool, s string) string {
 		return ""
 	}
 
-	x := Head(s)
-	xs := Tail(s)
+	rs := []rune(s)
+	takeCount := 0
 
-	if !p(x) {
-		return ""
+	for i := 0; i < len(rs); i++ {
+
+		if !p(rs[i]) {
+			break
+		}
+
+		takeCount++
 	}
 
-	return string(x) + TakeWhile(p, xs)
+	return Take(takeCount, s)
 }
 
 //DropWhile returns the suffix remaining after TakeWhile
