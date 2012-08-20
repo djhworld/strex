@@ -43,8 +43,10 @@ func Tail(s string) string {
 
 //Take returns the n rune prefix of s or s itself if n > len([]rune(s))
 func Take(n int, s string) string {
-	if n <= 0 || s == "" || n > len(s) {
+	if n <= 0 || s == "" {
 		return ""
+	} else if n > len(s) {
+		return s
 	}
 
 	//TODO: Deal with rune encoding errors
