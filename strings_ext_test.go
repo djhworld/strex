@@ -572,7 +572,7 @@ func TestAllFalse(t *testing.T) {
 
 // --------------------- TAKEWHILE ------------------------
 func BenchmarkTakeWhile(b *testing.B) {
-	var str string = "aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+	var str string = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
 	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
 
 	for i := 0; i < b.N; i++ {
@@ -609,7 +609,7 @@ func TestTakeWhileWithOneChar(t *testing.T) {
 
 // --------------------- DROPWHILE ------------------------
 func BenchmarkDropWhile(b *testing.B) {
-	var str string = "aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+	var str string = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
 	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
 
 	for i := 0; i < b.N; i++ {

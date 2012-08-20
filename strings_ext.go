@@ -125,17 +125,38 @@ func TakeWhile(p func(rune) bool, s string) string {
 	return Take(takeCount, s)
 }
 
+// not performant
+//func DropWhile(p func(rune) bool, s string) string {
+//	if s == "" {
+//		return ""
+//	}
+//	x := Head(s)
+//	xs := Tail(s)
+//	if !p(x) {
+//		return s
+//	}
+//	return DropWhile(p, xs)
+//}
+
 //DropWhile returns the suffix remaining after TakeWhile
 func DropWhile(p func(rune) bool, s string) string {
 	if s == "" {
 		return ""
 	}
-	x := Head(s)
-	xs := Tail(s)
-	if !p(x) {
-		return s
+
+	rs := []rune(s)
+	dropCount := 0
+
+	for i := 0; i < len(rs); i++ {
+
+		if !p(rs[i]) {
+			break
+		}
+
+		dropCount++
 	}
-	return DropWhile(p, xs)
+
+	return Drop(dropCount, s)
 }
 
 //Reverse returns the string s in reverse order
