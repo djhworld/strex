@@ -30,15 +30,31 @@ func Tail(s string) string {
 	return s[sz:]
 }
 
+//Removed. Recursive solution is not performant
+//func Take(n int, s string) string {
+//	if n <= 0 || s == "" {
+//		return ""
+//	}
+//
+//	x := string(Head(s))
+//	xs := Tail(s)
+//	return x + Take(n-1, xs)
+//}
+
 //Take returns the n rune prefix of s or s itself if n > len([]rune(s))
 func Take(n int, s string) string {
 	if n <= 0 || s == "" {
 		return ""
 	}
 
-	x := string(Head(s))
-	xs := Tail(s)
-	return x + Take(n-1, xs)
+	//TODO: Deal with rune encoding errors
+	byteLen := 0
+	for i := 0; i < n; i++ {
+		_, runeByteLen := utf8.DecodeRuneInString(s[byteLen:])
+		byteLen += runeByteLen
+	}
+
+	return s[:byteLen]
 }
 
 //Drop returns the suffix of s after the first n runes, or "" if n > len([]rune(s))
