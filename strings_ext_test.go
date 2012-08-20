@@ -163,6 +163,14 @@ func TestTakeWithStringLength(t *testing.T) {
 }
 
 // --------------------- DROP ------------------------
+func BenchmarkDrop(b *testing.B) {
+	var str string = "hello this is a benchmarking test to see if this works"
+	for i := 0; i < b.N; i++ {
+		Drop(12, str)
+	}
+}
+
+
 func TestDrop(t *testing.T) {
 	var input string = "abcdef"
 	var expected string = "def"

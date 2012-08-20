@@ -57,14 +57,30 @@ func Take(n int, s string) string {
 	return s[:byteLen]
 }
 
+//Removed. Recursive solution is not performant
+//func Drop(n int, s string) string {
+//	if n <= 0 || s == "" {
+//		return s
+//	}
+//
+//	xs := Tail(s)
+//	return Drop(n-1, xs)
+//}
+
 //Drop returns the suffix of s after the first n runes, or "" if n > len([]rune(s))
 func Drop(n int, s string) string {
 	if n <= 0 || s == "" {
 		return s
 	}
 
-	xs := Tail(s)
-	return Drop(n-1, xs)
+	//TODO: Deal with rune encoding errors
+	byteLen := 0
+	for i := 0; i < n; i++ {
+		_, runeByteLen := utf8.DecodeRuneInString(s[byteLen:])
+		byteLen += runeByteLen
+	}
+
+	return s[byteLen:]
 }
 
 //TakeWhile, applied to a predicate p and a string s, returns the longest 
