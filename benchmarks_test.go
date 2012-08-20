@@ -10,6 +10,18 @@ func BenchmarkHead(b *testing.B) {
 	}
 }
 
+func BenchmarkTail(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Tail(inputStr)
+	}
+}
+
+func BenchmarkInit(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Init(inputStr)
+	}
+}
+
 func BenchmarkTake(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Take(12, inputStr)
@@ -53,6 +65,13 @@ func BenchmarkFilter(b *testing.B) {
 	}
 }
 
+func BenchmarkAll(b *testing.B) {
+	var isLower func(rune) bool = func(r rune) bool { return r >= 97 && r <= 122 }
+	for i := 0; i < b.N; i++ {
+		All(isLower, inputStr)
+	}
+}
+
 func BenchmarkTakeWhile(b *testing.B) {
 	var isLower func(rune) bool = func(r rune) bool { return r >= 97 && r <= 122 }
 
@@ -68,3 +87,12 @@ func BenchmarkDropWhile(b *testing.B) {
 		DropWhile(isLower, inputStr)
 	}
 }
+
+func BenchmarkSpan(b *testing.B) {
+	var isLower func(rune) bool = func(r rune) bool { return r >= 97 && r <= 122 }
+
+	for i := 0; i < b.N; i++ {
+		Span(isLower, inputStr)
+	}
+}
+

@@ -260,7 +260,7 @@ func Init(s string) string {
 
 	_, sz := utf8.DecodeRuneInString(s)
 	c := utf8.RuneCountInString(s)
-	return s[0 : (sz*c)-sz]
+	return s[:(sz*c)-sz]
 }
 
 //IsEmpty tests whether the string s is empty
