@@ -45,7 +45,7 @@ func Tail(s string) string {
 func Take(n int, s string) string {
 	if n <= 0 || s == "" {
 		return ""
-	} else if n > len(s) {
+	} else if n > utf8.RuneCountInString(s) {
 		return s
 	}
 
@@ -75,7 +75,7 @@ func Take(n int, s string) string {
 func Drop(n int, s string) string {
 	if n <= 0 || s == "" {
 		return s
-	} else if n > len(s) {
+	} else if n > utf8.RuneCountInString(s) {
 		return ""
 	}
 

@@ -4,6 +4,7 @@ import (
 	"github.com/bmizerany/assert"
 	"strings"
 	"testing"
+	"unicode/utf8"
 )
 
 func FailWithLog(t *testing.T, log string) {
@@ -135,16 +136,14 @@ func TestTakeWithMoreThanStringLength(t *testing.T) {
 	var expected string = "test"
 	var actual string = Take(500, input)
 
-	assert.Equal(t, len(actual), len(expected))
 	assert.Equal(t, actual, expected)
 }
 
 func TestTakeWithStringLength(t *testing.T) {
 	var input string = "test"
 	var expected string = "test"
-	var actual string = Take(len(input), input)
+	var actual string = Take(utf8.RuneCountInString(input), input)
 
-	assert.Equal(t, len(actual), len(expected))
 	assert.Equal(t, actual, expected)
 }
 
@@ -176,7 +175,7 @@ func TestDropWithOneChar(t *testing.T) {
 func TestDropWithStringLength(t *testing.T) {
 	var input string = "hello world"
 	var expected string = ""
-	var actual string = Drop(len(input), input)
+	var actual string = Drop(utf8.RuneCountInString(input), input)
 
 	assert.Equal(t, actual, expected)
 }
