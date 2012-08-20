@@ -12,13 +12,6 @@ func FailWithLog(t *testing.T, log string) {
 }
 
 // --------------------- HEAD ------------------------
-func BenchmarkHead(b *testing.B) {
-	var str string = "hello"
-	for i := 0; i < b.N; i++ {
-		Head(str)
-	}
-}
-
 func TestHead(t *testing.T) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -97,13 +90,6 @@ func TestTailWithEmpty(t *testing.T) {
 }
 
 // --------------------- TAKE ------------------------
-func BenchmarkTake(b *testing.B) {
-	var str string = "hello this is a benchmarking test to see if this works"
-	for i := 0; i < b.N; i++ {
-		Take(12, str)
-	}
-}
-
 func TestTake(t *testing.T) {
 	var input string = "testing"
 	var expected string = "test"
@@ -163,14 +149,6 @@ func TestTakeWithStringLength(t *testing.T) {
 }
 
 // --------------------- DROP ------------------------
-func BenchmarkDrop(b *testing.B) {
-	var str string = "hello this is a benchmarking test to see if this works"
-	for i := 0; i < b.N; i++ {
-		Drop(12, str)
-	}
-}
-
-
 func TestDrop(t *testing.T) {
 	var input string = "abcdef"
 	var expected string = "def"
@@ -228,13 +206,6 @@ func TestDropWithBelowZero(t *testing.T) {
 }
 
 // --------------------- REVERSE ------------------------
-func BenchmarkReverse(b *testing.B) {
-	var str string = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-	for i := 0; i < b.N; i++ {
-		Reverse(str)
-	}
-}
-
 func TestReverse(t *testing.T) {
 	var input string = "testing"
 	var expected string = "gnitset"
@@ -578,15 +549,6 @@ func TestAllFalse(t *testing.T) {
 }
 
 // --------------------- TAKEWHILE ------------------------
-func BenchmarkTakeWhile(b *testing.B) {
-	var str string = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
-
-	for i := 0; i < b.N; i++ {
-		TakeWhile(isA, str)
-	}
-}
-
 func TestTakeWhile(t *testing.T) {
 	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
 	var input string = "aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
@@ -615,15 +577,6 @@ func TestTakeWhileWithOneChar(t *testing.T) {
 }
 
 // --------------------- DROPWHILE ------------------------
-func BenchmarkDropWhile(b *testing.B) {
-	var str string = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
-
-	for i := 0; i < b.N; i++ {
-		DropWhile(isA, str)
-	}
-}
-
 func TestDropWhile(t *testing.T) {
 	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
 	var input string = "aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
