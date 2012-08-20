@@ -569,3 +569,77 @@ func TestAllFalse(t *testing.T) {
 
 	assert.Equal(t, actual, expected)
 }
+
+// --------------------- TAKEWHILE ------------------------
+func BenchmarkTakeWhile(b *testing.B) {
+	var str string = "aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
+
+	for i := 0; i < b.N; i++ {
+		TakeWhile(isA, str)
+	}
+}
+
+func TestTakeWhile(t *testing.T) {
+	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
+	var input string = "aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+	var expected string = "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+	var actual string = TakeWhile(isA, input)
+
+	assert.Equal(t, actual, expected)
+}
+
+func TestTakeWhileWithEmpty(t *testing.T) {
+	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
+	var input string = ""
+	var expected string = ""
+	var actual string = TakeWhile(isA, input)
+
+	assert.Equal(t, actual, expected)
+}
+
+func TestTakeWhileWithOneChar(t *testing.T) {
+	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
+	var input string = "a"
+	var expected string = "a"
+	var actual string = TakeWhile(isA, input)
+
+	assert.Equal(t, actual, expected)
+}
+
+// --------------------- DROPWHILE ------------------------
+func BenchmarkDropWhile(b *testing.B) {
+	var str string = "aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
+
+	for i := 0; i < b.N; i++ {
+		DropWhile(isA, str)
+	}
+}
+
+func TestDropWhile(t *testing.T) {
+	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
+	var input string = "aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+	var expected string = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+	var actual string = DropWhile(isA, input)
+
+	assert.Equal(t, actual, expected)
+}
+
+func TestDropWhileWithEmpty(t *testing.T) {
+	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
+	var input string = ""
+	var expected string = ""
+	var actual string = DropWhile(isA, input)
+
+	assert.Equal(t, actual, expected)
+}
+
+func TestDropWhileWithOneChar(t *testing.T) {
+	var isA func(rune)bool = func(r rune)bool { return r == 'a' }
+	var input string = "b"
+	var expected string = "b"
+	var actual string = DropWhile(isA, input)
+
+	assert.Equal(t, actual, expected)
+}
