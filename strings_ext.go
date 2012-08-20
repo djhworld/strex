@@ -58,6 +58,8 @@ func Take(n int, s string) string {
 }
 
 //Removed. Recursive solution is not performant
+//BenchmarkDrop	 5000000	       666 ns/op
+//BenchmarkDrop	10000000	       283 ns/op - non recursive
 //func Drop(n int, s string) string {
 //	if n <= 0 || s == "" {
 //		return s
