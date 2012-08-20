@@ -159,14 +159,33 @@ func DropWhile(p func(rune) bool, s string) string {
 	return Drop(dropCount, s)
 }
 
+//this is very inefficient
+// BenchmarkReverse	   50000	     52679 ns/op
+//func Reverse(s string) string {
+//	if s == "" {
+//		return ""
+//	}
+//	x := Head(s)
+//	xs := Tail(s)
+//	return Reverse(xs) + string(x)
+//}
+
 //Reverse returns the string s in reverse order
 func Reverse(s string) string {
 	if s == "" {
 		return ""
 	}
-	x := Head(s)
-	xs := Tail(s)
-	return Reverse(xs) + string(x)
+
+	rs := []rune(s)
+	rss := make([]rune, len(rs), len(rs))
+
+	o := 0
+	for i := len(rs) - 1; i >= 0; i-- {
+		rss[o] = rs[i]
+		o++
+	}
+
+	return string(rss)
 }
 
 // Filter, applied to a predicate and a string, returns a string of characters 

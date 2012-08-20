@@ -228,6 +228,13 @@ func TestDropWithBelowZero(t *testing.T) {
 }
 
 // --------------------- REVERSE ------------------------
+func BenchmarkReverse(b *testing.B) {
+	var str string = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+	for i := 0; i < b.N; i++ {
+		Reverse(str)
+	}
+}
+
 func TestReverse(t *testing.T) {
 	var input string = "testing"
 	var expected string = "gnitset"
