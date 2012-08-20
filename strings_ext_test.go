@@ -133,7 +133,7 @@ func TestTakeWithOneChar(t *testing.T) {
 func TestTakeWithMoreThanStringLength(t *testing.T) {
 	var input string = "test"
 	var expected string = "test"
-	var actual string = Take(20, input)
+	var actual string = Take(500, input)
 
 	assert.Equal(t, len(actual), len(expected))
 	assert.Equal(t, actual, expected)
