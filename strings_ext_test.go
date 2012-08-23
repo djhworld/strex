@@ -1,4 +1,4 @@
-package strings_ext
+package strex
 
 import (
 	"github.com/bmizerany/assert"

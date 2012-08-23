@@ -5,7 +5,7 @@ These functions are very high level and may not be very efficient. Most of the
 functions take inspiration from the Data.List package found in the Haskell programming 
 language
 */
-package strings_ext
+package strex
 
 import (
 	"strings"
