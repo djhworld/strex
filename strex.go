@@ -1,9 +1,13 @@
 /*
 Package that adds a few extra features to the strings package. 
 
-These functions are very high level and may not be very efficient. Most of the 
-functions take inspiration from the Data.List package found in the Haskell programming 
-language
+These functions are very high level and take inspiration from the Data.List package 
+found in the Haskell programming language
+
+With thanks to reddit users `rogpeppe`, `DavidScone`, `DisposaBoy` who helped me in making
+this library better and quicker 
+
+Daniel Harper (djhworld) 2012
 */
 package strex
 
