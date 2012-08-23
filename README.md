@@ -8,7 +8,7 @@ This is a small library that implements some of the functions from the `Data.Lis
 
 ##Rationale 
 
-Because I enjoy programming in Haskell and want some of the standard library features found `Data.List` to be in Go, plus I found it an enjoyable intellectual excercise too. 
+Because I enjoy programming in Haskell and want some of the standard library features found `Data.List` to be in Go, plus I found it an enjoyable intellectual exercise too. 
 
 ## But why only for strings? Why not use empty interfaces and make your code "generic" so it works with any datatype?
 
